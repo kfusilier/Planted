@@ -5,7 +5,7 @@
 User Stories
 
 MVP:
-•	As a user, I want to be able to sign-up.
+•	As a user, I want to be able to sign-up. /br
 •	As a user, I want to be able to login.
 •	As a user, I want to be able to make a catalog of prospective plants.
 •	As a user, I want to be able to make a planting schedule/calendar.
