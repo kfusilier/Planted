@@ -1,7 +1,5 @@
 #Planted - ROUGH BUT WORKING ON IT!
 
-Some of the temporarily added files are from past work that is similiar, using it as a jumping off model while I complete the new ones.
-
 #Gardening journal app.
 
 User Stories
