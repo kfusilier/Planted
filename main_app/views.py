@@ -24,3 +24,7 @@ class Plant_Detail(TemplateView):
 
 class Note_Detail(TemplateView):
     template_name = "note_detail.html"
+
+class Calendar(TemplateView): 
+    template_name = "calendar.html"
+    
