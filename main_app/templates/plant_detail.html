@@ -3,3 +3,33 @@
 {% block title %} 
 Plant Detail
 {% endblock %}
+
+<body>
+    {% block content %}
+		<Header id="headerStyle"><p>Plant Detail</p></Header>
+    
+		<div class='bodyStyle'>
+            <img src="{{plant.img}}" alt="{{plant.kind}}"width="150" height="220"/>
+			<h4>{{plant.kind}}</h4></a>
+			<p>Variety: {{plant.variety}}</p>
+			<p>Seed Depth: {{plant.seed_depth}}</p>
+			<p>Seed Spacing: {{plant.seed_spacing}}</p>
+			<p>Germination: {{plant.germination}}</p>
+			<p>Plant Spacing: {{plant.plant_spacing}}</p>
+			<p>Row Spacing: {{plant.row_spacing}}</p>
+			<p>Days to Harvest: {{plant.days_to_harvest}}</p>
+			<p>Ideal Sunlight: {{plant.sunlight}}</p>
+			<p>Start Seeds Indoors: {{plant.indoor_start}}</p>
+			<p>Stop Seeds Indoors: {{plant.indoor_stop}}</p>
+			<p>Start Transplanting: {{plant.transplant_start}}</p>
+			<p>Stop Transplanting: {{plant.transplant_stop}}</p>
+			<p>Start Seeds Outdoors: {{plant.outdoor_start}}</p>
+			<p>Stop Seeds Outdoors: {{plant.outdoor_stop}}</p>
+			<p>Succession Planting: {{plant.succession}}</p>
+			<p>Notes: {{plant.notes}}</p>
+			<p>Created: {{plant.created_at}}</p>
+			<!-- <p>Updated: {{plant.updated_at}}</p> -->
+		</div>
+
+    {% endblock %}
+</body>

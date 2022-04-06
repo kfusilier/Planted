@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.views import View # class to handle requests
 from django.http import HttpResponse # class to handle sending a type of response
-from django.views.generic.base import TemplateView
 from .models import Plant
+from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView
+from django.views.generic import DetailView
 
 # Create your views here.
 
@@ -42,3 +44,34 @@ class Plant_List(TemplateView):
 			# default header for not searching 
 			context["header"] = "Master Plant List"
 		return context
+
+class Plant_Create(CreateView):
+    model = Plant
+    fields = [
+	'kind',
+	'variety',
+	'img',
+	'seed_depth',
+	'seed_spacing',
+	'germination',
+	'plant_spacing',
+	'row_spacing',
+	'days_to_harvest',
+	'sunlight',
+	'indoor_start',
+	'indoor_stop',
+	'transplant_start',
+	'transplant_stop',
+	'outdoor_start',
+	'outdoor_stop',
+	'succession',
+	'notes',
+	'created_by',
+	# 'updated_at',
+	]
+    template_name = "plant_create.html"
+    success_url = "/plants/"
+
+class Plant_Detail(DetailView):
+    model = Plant
+    template_name = "plant_detail.html"

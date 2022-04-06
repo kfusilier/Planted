@@ -31,7 +31,7 @@ class Plant(models.Model):
 	succession = models.CharField(max_length=50, choices = SUCCESSION_CHOICES)
 	notes = models.CharField(max_length=100)
 	created_at = models.DateTimeField(auto_now_add=True)
-	updated_at = models.DateTimeField(auto_now=True)
+	# updated_at = models.DateTimeField(auto_now=True)
 
 	def __str__(self):
 		return self.kind

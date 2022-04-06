@@ -12,6 +12,7 @@ Plant List
         <!-- Search Form  -->
         <form> 
             <div>
+                <a href="{% url 'plant_create' %}">Add a new Plant</a><br><br>
                 <input type="text" name="kind" placeholder="plant kind"/>
                 <input type="submit" value="Search"/>
                 <button><a href="{% url 'plant_list' %}">Clear Search</a></button>
@@ -22,6 +23,7 @@ Plant List
             <div class="plantList">
                 <div class="plantStyle">
                     <img src="{{plant.img}}" alt="{{plant.kind}}"width="150" height="220">
+                    <a href="{% url 'plant_detail' plant.pk %}">
                     <h4>{{plant.kind}}</h4></a>
                     <p>Variety: {{plant.variety}}</p>
                     <p>Seed Depth: {{plant.seed_depth}}</p>
@@ -41,8 +43,6 @@ Plant List
                     <p>Notes: {{plant.notes}}</p>
                     <p>Created: {{plant.created_at}}</p>
                     <p>Updated: {{plant.updated_at}}</p>
-                    <!-- <p>Added By: 
-                    <a href='/user/{{book.user.username}}'>{{book.user.username}}</a></p>   -->
                 </div>
             </div>
         {% endfor %}
@@ -50,6 +50,3 @@ Plant List
 
 {% endblock %}
 <body> 
-
-
-    <!-- <a href="{% url 'plant_detail' plant.pk %}"> -->
