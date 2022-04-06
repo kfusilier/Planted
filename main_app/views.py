@@ -13,8 +13,33 @@ class Home(TemplateView):
 class About(TemplateView):
     template_name = "about.html"
 
+class Plant:
+    def __init__(self, kind, variety, germination):
+        self.kind = kind
+        self.variety = variety
+        self.germination = germination
+
+plants = [
+    Plant('Carrot', 'Atomic Purple', '10 days'),
+    Plant('Tomato', 'Cherry', '12 days'),
+    Plant('Eggplant', 'Fairy Tale', '15 days'),
+]
+
 class Plant_List(TemplateView):
     template_name = "plant_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["plants"] = plants # this is where we add the key into our context object for the view to use
+        return context
+
+
+
+
+
+
+
+
 
 class Profile(TemplateView):
     template_name = "profile.html"

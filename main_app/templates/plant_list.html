@@ -7,9 +7,14 @@
 			<title>Plant List</title>
     </head>
     <body>
-	{% extends 'base.html' %}
-	{% block content %}
-		<h1>Plant List</h1>
-	{% endblock %}
+{% extends 'base.html' %}
+{% block content %}
+    <h1>The Plants!:</h1>
+    {% for plant in plants %}
+    <h3>Name: {{plant.type}}</h3>
+    <h3>Age: {{plant.variety}}</h3>
+    <h3>Gender: {{plant.germination}}</h3>
+    {% endfor %}
+{% endblock %}
     </body>
 </html>

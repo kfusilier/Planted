@@ -7,10 +7,27 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
 	<script src="{% static 'scripts/app.js' %}" defer></script>
-	<title>Planted</title>
+	<title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-	
+	<nav>
+        <a href="/admin">Admin</a>
+        <span> | </span>
+        <a href="/">Home</a>
+        <span> | </span>
+        <a href="/about">About</a>
+        <span> | </span>
+        <a href="/plants">Plant List</a>
+        <span> | </span>
+        <a href="/profile">Profile</a>
+        <span> | </span>
+        <a href="/plant_detail">Plant Details</a>
+        <span> | </span>
+        <a href="/note_detail">Notes</a>
+        <span> | </span>
+		<a href="/calendar">Calendar</a>
+        <span> | </span>
+			</nav>
     {% block content %}  
 
     {% endblock %}
