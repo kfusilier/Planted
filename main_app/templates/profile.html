@@ -1,15 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-			<title>Profile</title>
-    </head>
-    <body>
-	{% extends 'base.html' %}
-	{% block content %}
-		<h1>Profile</h1>
-	{% endblock %}
-    </body>
-</html>
+
+<!-- 
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} 
+Profile 👤
+{% endblock %} 
+
+<body>
+		{% block content %}
+		<Header id="headerStyle"><p>{{ username }}'s collection:</p></Header>
+
+		{% for book in books %}
+			<img src="{{book.img}}" alt="{{book.title}}"width="150" height="220">
+			<a href="/books/{{ book.id }}">
+				<h3>{{ book.title }}</h3>
+			</a>
+			
+		{% endfor %}
+
+		{% endblock %}
+</body> -->
