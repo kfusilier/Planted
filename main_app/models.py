@@ -14,6 +14,7 @@ class Plant(models.Model):
 
 	kind = models.CharField(max_length=30)
 	variety = models.CharField(max_length=50)
+	img = models.CharField(max_length=500)
 	seed_depth = models.IntegerField()
 	seed_spacing = models.IntegerField()
 	germination = models.IntegerField()
@@ -39,4 +40,3 @@ class Plant(models.Model):
 		ordering = ['kind']
 
 	# user = models.ForeignKey(User, on_delete=models.CASCADE)
-		
