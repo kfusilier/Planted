@@ -34,8 +34,11 @@ class Plant_List(TemplateView):
 		kind = self.request.GET.get("kind")
 		# If a query exists we will filter by kind
 		if kind != None:
-		# .filter is the sql WHERE statement and name__icontains is doing a search for any name that contains the query param
 			context["plants"] = Plant.objects.filter(kind__icontains=kind)
+			# We add a header context that includes the search param
+			context["header"] = f"Searching for {kind}"
 		else:
 			context["plants"] = Plant.objects.all()
+			# default header for not searching 
+			context["header"] = "Master Plant List"
 		return context
