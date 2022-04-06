@@ -1,5 +1,7 @@
 from django.db import models
 
+# super user: kfusilier - norm PS
+
 SUCCESSION_CHOICES = (
 	('N/A', 'not applicable'),
 	('7', 're-seed every 7 days'),
