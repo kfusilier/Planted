@@ -24,6 +24,10 @@ Plant Detail
 			<p>Direct Seed Outdoors: {{plant.outdoor_start}} - {{plant.outdoor_stop}}</p>
 			<p>Succession Planting: {{plant.succession}}</p>
 			<p>Notes: {{plant.notes}}</p>
+			<p>Pests: {{plant.pest.name}}{% for pest in plant.pests.all %}<p> {{pest.name}}</p>
+		{% empty %}
+            <div>Plant has no Pests!</div>
+        {% endfor %}
 			<p>Created: {{plant.created_at}}</p>
 			<a href="{% url 'plant_update' plant.pk %}">Update</a>
 		    <a href="{% url 'plant_delete' plant.pk %}">Delete</a>	

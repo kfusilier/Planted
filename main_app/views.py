@@ -68,8 +68,7 @@ class Plant_Create(CreateView):
 	'outdoor_stop',
 	'succession',
 	'notes',
-	# 'created_at',
-	# 'updated_at',
+	'pests',
 	]
 	template_name = "plant_create.html"
 	success_url = "/plants/"
@@ -99,6 +98,7 @@ class Plant_Update(UpdateView):
 	'outdoor_stop',
 	'succession',
 	'notes',
+	'pests',
 	]
 	template_name = "plant_update.html"
 	def get_success_url(self):
@@ -160,3 +160,22 @@ class Note_Delete(DeleteView):
     model = Note
     template_name = "note_delete.html"
     success_url = "/notes/"
+
+# Pests
+# class Pest_List(TemplateView):
+# 	template_name = "pest_list.html"
+
+# 	def get_context_data(self, **kwargs):
+# 		context = super().get_context_data(**kwargs)
+# 		# to get the query parameter we have to acccess it in the request.GET dictionary object        
+# 		name = self.request.GET.get("name")
+# 		# If a query exists we will filter by kind
+# 		if name != None:
+# 			context["pests"] = Note.objects.filter(title__icontains=title)
+# 			# We add a header context that includes the search param
+# 			context["header"] = f"Searching for {title}"
+# 		else:
+# 			context["notes"] = Note.objects.all()
+# 			# default header for not searching 
+# 			context["header"] = "All Notes"
+# 		return context

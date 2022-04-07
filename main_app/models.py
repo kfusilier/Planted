@@ -1,7 +1,15 @@
 from django.db import models
 from django.utils import timezone
-
 # super user: kfusilier - norm PS
+
+class Pest(models.Model):
+	name = models.CharField(max_length=100)
+	img = models.CharField(max_length=500)
+	method = models.CharField(max_length=300)
+	treatment = models.CharField(max_length=300)
+	
+	def __str__(self):
+		return self.name
 
 SUCCESSION_CHOICES = (
 	('N/A', 'not applicable'),
@@ -30,6 +38,7 @@ class Plant(models.Model):
 	outdoor_start = models.DateField()
 	outdoor_stop = models.DateField()
 	succession = models.CharField(max_length=50, choices = SUCCESSION_CHOICES)
+	pests = models.ManyToManyField(Pest)
 	created_at = models.DateTimeField(auto_now_add=True)
 	# updated_at = models.DateTimeField(auto_now=True)
 
@@ -38,8 +47,6 @@ class Plant(models.Model):
 
 	class Meta:
 		ordering = ['kind']
-
-	# user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Note(models.Model):
 	title = models.CharField(max_length=30)
