@@ -28,6 +28,7 @@ class Note_Detail(TemplateView):
 class Calendar(TemplateView): 
 	template_name = "calendar.html"
 
+# PLANTS
 class Plant_List(TemplateView):
 	template_name = "plant_list.html"
 
@@ -46,7 +47,6 @@ class Plant_List(TemplateView):
 			context["header"] = "Master Plant List"
 		return context
 
-# PLANTS
 class Plant_Create(CreateView):
 	model = Plant
 	fields = [
@@ -128,16 +128,35 @@ class Note_List(TemplateView):
 			context["header"] = "All Notes"
 		return context
 
+class Note_Create(CreateView):
+	model = Note
+	fields = [
+	'plant',
+	'title',
+	'date',
+	'body',
+	]
+	template_name = "note_create.html"
+	success_url = "/notes/"
 
+class Note_Detail(DetailView):
+	model = Note
+	template_name = "note_detail.html"
 
+class Note_Update(UpdateView):
+	model = Plant
+	fields = [
+	'plant',
+	'title',
+	'date',
+	'body',
 
-# class Note_Create(CreateView):
-# 	model = Note
-# 	fields = '__all__'
-# 	success_url = '/notes'
+	]
+	template_name = "note_update.html"
+	def get_success_url(self):
+		return reverse('note_detail', kwargs={'pk': self.object.pk})
 
-#   	def form_valid(self, form):
-# 		self.object = form.save(commit=False)
-# 		self.object.user = self.request.user
-# 		self.object.save()
-# 		return HttpResponseRedirect('/notes')
+class Note_Delete(DeleteView):
+    model = Note
+    template_name = "note_delete.html"
+    success_url = "/notes/"

@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+
+{% block title %} 
+Note Delete
+{% endblock %} 
+
+<body>
+    {% block content %}
+
+		<div class="formContainer">
+			<div id="formStyle"></div>
+                <h1>Are you sure you want to Delete {{note.title}}</h1>
+                    <form method="post">
+                        {% csrf_token %}
+			            	<div id="formStyle">
+                        <!-- confirm delete -->
+                            <input type="submit" value="Confirm" />
+                        <!-- Redirect back to detail on cancel -->
+                            <button><a href="{% url 'note_detail' note.pk %}">Cancel</a></button>
+                            </div>
+                    </form>
+            </div>
+        </div>
+    {% endblock %}  
+</body>

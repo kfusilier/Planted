@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # super user: kfusilier - norm PS
 
@@ -42,7 +43,7 @@ class Plant(models.Model):
 
 class Note(models.Model):
 	title = models.CharField(max_length=30)
-	date = models.DateField(auto_now_add=True)
+	date = models.DateTimeField(default=timezone.now)
 	body = models.CharField(max_length=250)
 	plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
 	def __str__(self):

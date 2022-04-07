@@ -12,8 +12,8 @@ Note List
         <!-- Search Form  -->
         <form> 
             <div>
-
-                <input type="text" name="kind" placeholder="note title"/>
+				<a href="{% url 'note_create' %}">Add Note
+                <input type="text" name="kind" placeholder="note title"/></a>
                 <input type="submit" value="Search"/>
                 <button><a href="{% url 'note_list' %}">Clear Search</a></button>
             </div>
@@ -22,13 +22,11 @@ Note List
         {% for note in notes %}
             <div class="plantList">
                 <div class="plantStyle">
-                    <!-- <img src="{{plant.img}}" alt="{{plant.kind}}"width="150" height="220"> -->
-
-                    <h4>{{note.title}}: {{note.date}}</h4></a>
-
+                    <a href="{% url 'note_detail' note.pk %}">
+                    <h4>{{note.title}}:{{note.date}}</h4></a>
+                {% endfor %}
                 </div>
             </div>
-        {% endfor %}
     </div>
 
 {% endblock %}
