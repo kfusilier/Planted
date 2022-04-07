@@ -12,6 +12,7 @@ urlpatterns = [
 	path('plants/new/', views.Plant_Create.as_view(), name='plant_create'),
 	path('plants/<int:pk>/', views.Plant_Detail.as_view(), name='plant_detail'),
 	path('plants/<int:pk>/update', views.Plant_Update.as_view(), name='plant_update'),
+	path('plants/<int:pk>/delete', views.Plant_Delete.as_view(), name='plant_delete'),
 ]
 
 	# path('signup/', views.About.as_view(), name='signup'), 

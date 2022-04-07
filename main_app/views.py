@@ -3,7 +3,7 @@ from django.views import View # class to handle requests
 from django.http import HttpResponse # class to handle sending a type of response
 from .models import Plant
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
 
@@ -67,7 +67,7 @@ class Plant_Create(CreateView):
 	'outdoor_stop',
 	'succession',
 	'notes',
-	'created_by',
+	# 'created_at',
 	# 'updated_at',
 	]
 	template_name = "plant_create.html"
@@ -79,7 +79,8 @@ class Plant_Detail(DetailView):
 
 class Plant_Update(UpdateView):
 	model = Plant
-	fields = ['kind',
+	fields = [
+	'kind',
 	'variety',
 	'img',
 	'seed_depth',
@@ -96,7 +97,13 @@ class Plant_Update(UpdateView):
 	'outdoor_start',
 	'outdoor_stop',
 	'succession',
-	'notes',]
+	'notes',
+	]
 	template_name = "plant_update.html"
 	def get_success_url(self):
 		return reverse('plant_detail', kwargs={'pk': self.object.pk})
+
+class Plant_Delete(DeleteView):
+    model = Plant
+    template_name = "plant_delete.html"
+    success_url = "/plants/"

@@ -26,9 +26,8 @@ Plant Detail
 			<p>Notes: {{plant.notes}}</p>
 			<p>Created: {{plant.created_at}}</p>
 			<a href="{% url 'plant_update' plant.pk %}">Update</a>
-			<a href=""></a>
+		    <a href="{% url 'plant_delete' plant.pk %}">Delete</a>	
 		</div>
 
     {% endblock %}
 </body>
- 
