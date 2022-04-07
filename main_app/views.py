@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View # class to handle requests
 from django.http import HttpResponse # class to handle sending a type of response
-from .models import Plant
+from .models import Plant, Note
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
@@ -110,13 +110,34 @@ class Plant_Delete(DeleteView):
     success_url = "/plants/"
 
 # NOTES
-class Note_Create(CreateView):
-	model = Note
-	fields = '__all__'
-	success_url = '/notes'
+class Note_List(TemplateView):
+	template_name = "note_list.html"
 
-  	def form_valid(self, form):
-		self.object = form.save(commit=False)
-		self.object.user = self.request.user
-		self.object.save()
-		return HttpResponseRedirect('/notes')
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		# to get the query parameter we have to acccess it in the request.GET dictionary object        
+		kind = self.request.GET.get("kind")
+		# If a query exists we will filter by kind
+		if kind != None:
+			context["notess"] = Note.objects.filter(title__icontains=title)
+			# We add a header context that includes the search param
+			context["header"] = f"Searching for {title}"
+		else:
+			context["notes"] = Note.objects.all()
+			# default header for not searching 
+			context["header"] = "All Notes"
+		return context
+
+
+
+
+# class Note_Create(CreateView):
+# 	model = Note
+# 	fields = '__all__'
+# 	success_url = '/notes'
+
+#   	def form_valid(self, form):
+# 		self.object = form.save(commit=False)
+# 		self.object.user = self.request.user
+# 		self.object.save()
+# 		return HttpResponseRedirect('/notes')

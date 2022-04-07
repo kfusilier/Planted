@@ -1,0 +1,35 @@
+{% extends 'base.html' %} 
+
+{% block title %} 
+Note List 
+{% endblock %} 
+
+<body> 
+{% block content %}
+    <Header id="headerStyle"><h3>{{header}}</h3></Header>
+
+    <div class='bodyStyle'>
+        <!-- Search Form  -->
+        <form> 
+            <div>
+
+                <input type="text" name="kind" placeholder="note title"/>
+                <input type="submit" value="Search"/>
+                <button><a href="{% url 'note_list' %}">Clear Search</a></button>
+            </div>
+        </form>
+        <!-- Plant_List Output  -->
+        {% for note in notes %}
+            <div class="plantList">
+                <div class="plantStyle">
+                    <!-- <img src="{{plant.img}}" alt="{{plant.kind}}"width="150" height="220"> -->
+
+                    <h4>{{note.title}}: {{note.date}}</h4></a>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+<body> 
