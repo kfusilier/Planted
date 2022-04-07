@@ -11,6 +11,7 @@ urlpatterns = [
 	path('calendar/', views.Calendar.as_view(), name='calendar'),
 	path('plants/new/', views.Plant_Create.as_view(), name='plant_create'),
 	path('plants/<int:pk>/', views.Plant_Detail.as_view(), name='plant_detail'),
+	path('plants/<int:pk>/update', views.Plant_Update.as_view(), name='plant_update'),
 ]
 
 	# path('signup/', views.About.as_view(), name='signup'), 

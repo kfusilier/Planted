@@ -3,8 +3,9 @@ from django.views import View # class to handle requests
 from django.http import HttpResponse # class to handle sending a type of response
 from .models import Plant
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import DetailView
+from django.urls import reverse
 
 # Create your views here.
 
@@ -46,8 +47,8 @@ class Plant_List(TemplateView):
 		return context
 
 class Plant_Create(CreateView):
-    model = Plant
-    fields = [
+	model = Plant
+	fields = [
 	'kind',
 	'variety',
 	'img',
@@ -69,9 +70,33 @@ class Plant_Create(CreateView):
 	'created_by',
 	# 'updated_at',
 	]
-    template_name = "plant_create.html"
-    success_url = "/plants/"
+	template_name = "plant_create.html"
+	success_url = "/plants/"
 
 class Plant_Detail(DetailView):
-    model = Plant
-    template_name = "plant_detail.html"
+	model = Plant
+	template_name = "plant_detail.html"
+
+class Plant_Update(UpdateView):
+	model = Plant
+	fields = ['kind',
+	'variety',
+	'img',
+	'seed_depth',
+	'seed_spacing',
+	'germination',
+	'plant_spacing',
+	'row_spacing',
+	'days_to_harvest',
+	'sunlight',
+	'indoor_start',
+	'indoor_stop',
+	'transplant_start',
+	'transplant_stop',
+	'outdoor_start',
+	'outdoor_stop',
+	'succession',
+	'notes',]
+	template_name = "plant_update.html"
+	def get_success_url(self):
+		return reverse('plant_detail', kwargs={'pk': self.object.pk})

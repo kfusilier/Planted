@@ -12,7 +12,7 @@ Plant List
         <!-- Search Form  -->
         <form> 
             <div>
-                <a href="{% url 'plant_create' %}">Add a new Plant</a><br><br>
+                <button><a href="{% url 'plant_create' %}">Add a new Plant</a></button><br><br>
                 <input type="text" name="kind" placeholder="plant kind"/>
                 <input type="submit" value="Search"/>
                 <button><a href="{% url 'plant_list' %}">Clear Search</a></button>
@@ -24,25 +24,22 @@ Plant List
                 <div class="plantStyle">
                     <img src="{{plant.img}}" alt="{{plant.kind}}"width="150" height="220">
                     <a href="{% url 'plant_detail' plant.pk %}">
-                    <h4>{{plant.kind}}</h4></a>
-                    <p>Variety: {{plant.variety}}</p>
-                    <p>Seed Depth: {{plant.seed_depth}}</p>
+                    <h4>{{plant.kind}}: {{plant.variety}}</h4></a>
+                    <!-- <p>Variety: </p> -->
+                    <!-- <p>Seed Depth: {{plant.seed_depth}}</p>
                     <p>Seed Spacing: {{plant.seed_spacing}}</p>
                     <p>Germination: {{plant.germination}}</p>
                     <p>Plant Spacing: {{plant.plant_spacing}}</p>
                     <p>Row Spacing: {{plant.row_spacing}}</p>
                     <p>Days to Harvest: {{plant.days_to_harvest}}</p>
                     <p>Ideal Sunlight: {{plant.sunlight}}</p>
-                    <p>Start Seeds Indoors: {{plant.indoor_start}}</p>
-                    <p>Stop Seeds Indoors: {{plant.indoor_stop}}</p>
-                    <p>Start Transplanting: {{plant.transplant_start}}</p>
-                    <p>Stop Transplanting: {{plant.transplant_stop}}</p>
-                    <p>Start Seeds Outdoors: {{plant.outdoor_start}}</p>
-                    <p>Stop Seeds Outdoors: {{plant.outdoor_stop}}</p>
+                    <p>Plant Seeds Indoors: {{plant.indoor_start}} - {{plant.indoor_stop}}</p>
+                    <p>Transplant Seedlings: {{plant.transplant_start}} - {{plant.transplant_stop}}</p>
+                    <p>Direct Seed Outdoors: {{plant.outdoor_start}} - {{plant.outdoor_stop}}</p>
                     <p>Succession Planting: {{plant.succession}}</p>
                     <p>Notes: {{plant.notes}}</p>
                     <p>Created: {{plant.created_at}}</p>
-                    <p>Updated: {{plant.updated_at}}</p>
+                    <p>Updated: {{plant.updated_at}}</p> -->
                 </div>
             </div>
         {% endfor %}
