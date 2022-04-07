@@ -46,6 +46,7 @@ class Plant_List(TemplateView):
 			context["header"] = "Master Plant List"
 		return context
 
+# PLANTS
 class Plant_Create(CreateView):
 	model = Plant
 	fields = [
@@ -107,3 +108,15 @@ class Plant_Delete(DeleteView):
     model = Plant
     template_name = "plant_delete.html"
     success_url = "/plants/"
+
+# NOTES
+class Note_Create(CreateView):
+	model = Note
+	fields = '__all__'
+	success_url = '/notes'
+
+  	def form_valid(self, form):
+		self.object = form.save(commit=False)
+		self.object.user = self.request.user
+		self.object.save()
+		return HttpResponseRedirect('/notes')

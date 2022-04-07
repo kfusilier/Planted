@@ -29,7 +29,6 @@ class Plant(models.Model):
 	outdoor_start = models.DateField()
 	outdoor_stop = models.DateField()
 	succession = models.CharField(max_length=50, choices = SUCCESSION_CHOICES)
-	notes = models.CharField(max_length=100)
 	created_at = models.DateTimeField(auto_now_add=True)
 	# updated_at = models.DateTimeField(auto_now=True)
 
@@ -40,3 +39,11 @@ class Plant(models.Model):
 		ordering = ['kind']
 
 	# user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Note(models.Model):
+	title = models.CharField(max_length=30)
+	date = models.DateField(auto_now_add=True)
+	body = models.CharField(max_length=250)
+	plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
+	def __str__(self):
+		return self.title
