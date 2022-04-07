@@ -67,7 +67,6 @@ class Plant_Create(CreateView):
 	'outdoor_start',
 	'outdoor_stop',
 	'succession',
-	'notes',
 	'pests',
 	]
 	template_name = "plant_create.html"
@@ -76,6 +75,15 @@ class Plant_Create(CreateView):
 class Plant_Detail(DetailView):
 	model = Plant
 	template_name = "plant_detail.html"
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		print(context)
+		plant = context["plant"]
+		print(plant.pk)
+			# = self.request.GET.get("pk")
+		context['notes'] = Note.objects.filter(plant=plant.pk)
+		print(context)
+		return context
 
 class Plant_Update(UpdateView):
 	model = Plant
@@ -97,11 +105,11 @@ class Plant_Update(UpdateView):
 	'outdoor_start',
 	'outdoor_stop',
 	'succession',
-	'notes',
 	'pests',
 	]
 	template_name = "plant_update.html"
 	def get_success_url(self):
+		# context['notes']
 		return reverse('plant_detail', kwargs={'pk': self.object.pk})
 
 class Plant_Delete(DeleteView):
@@ -119,7 +127,7 @@ class Note_List(TemplateView):
 		kind = self.request.GET.get("kind")
 		# If a query exists we will filter by kind
 		if kind != None:
-			context["notess"] = Note.objects.filter(title__icontains=title)
+			context["notes"] = Note.objects.filter(title__icontains=title)
 			# We add a header context that includes the search param
 			context["header"] = f"Searching for {title}"
 		else:
@@ -144,7 +152,7 @@ class Note_Detail(DetailView):
 	template_name = "note_detail.html"
 
 class Note_Update(UpdateView):
-	model = Plant
+	model = Note
 	fields = [
 	'plant',
 	'title',

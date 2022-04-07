@@ -23,8 +23,14 @@ Plant Detail
 			<p>Transplant Seedlings: {{plant.transplant_start}} - {{plant.transplant_stop}}</p>
 			<p>Direct Seed Outdoors: {{plant.outdoor_start}} - {{plant.outdoor_stop}}</p>
 			<p>Succession Planting: {{plant.succession}}</p>
-			<p>Notes: {{plant.notes}}</p>
-			<p>Pests: {{plant.pest.name}}{% for pest in plant.pests.all %}<p> {{pest.name}}</p>
+		{% for note in notes %}
+			<p>Notes: {{note.title}}</p>
+		{% empty %}
+			<div>Plant has no Notes.</div>
+		{% endfor %}
+			<p>Pests: {{plant.pest.name}}
+		{% for pest in plant.pests.all %}
+				<p> {{pest.name}}</p>
 		{% empty %}
             <div>Plant has no Pests!</div>
         {% endfor %}

@@ -55,3 +55,5 @@ class Note(models.Model):
 	plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
 	def __str__(self):
 		return self.title
+
+		
