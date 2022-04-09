@@ -8,6 +8,11 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 # Create your views here.
 
 # Here we will be creating a class called Home and extending it from the View class
@@ -29,6 +34,7 @@ class Calendar(TemplateView):
 class Profile(TemplateView):
 	template_name = "profile.html"
 
+@login_required
 def profile(request, username):
     user = User.objects.get(username=username)
     plants = Plant.objects.filter(user=user)
@@ -53,6 +59,7 @@ class Plant_List(TemplateView):
 			context["header"] = "Master Plant List"
 		return context
 
+@method_decorator(login_required, name='dispatch')
 class Plant_Create(CreateView):
 	model = Plant
 	fields = [
@@ -97,6 +104,7 @@ class Plant_Detail(DetailView):
 		print(context)
 		return context
 
+@method_decorator(login_required, name='dispatch')
 class Plant_Update(UpdateView):
 	model = Plant
 	fields = [
@@ -124,12 +132,14 @@ class Plant_Update(UpdateView):
 		# context['notes']
 		return reverse('plant_detail', kwargs={'pk': self.object.pk})
 
+@method_decorator(login_required, name='dispatch')
 class Plant_Delete(DeleteView):
     model = Plant
     template_name = "plant_delete.html"
     success_url = "/plants/"
 
 # NOTES
+@method_decorator(login_required, name='dispatch')
 class Note_List(TemplateView):
 	template_name = "note_list.html"
 
@@ -148,6 +158,7 @@ class Note_List(TemplateView):
 			context["header"] = "All Notes"
 		return context
 
+@method_decorator(login_required, name='dispatch')
 class Note_Create(CreateView):
 	model = Note
 	fields = [
@@ -159,10 +170,12 @@ class Note_Create(CreateView):
 	template_name = "note_create.html"
 	success_url = "/notes/"
 
+@method_decorator(login_required, name='dispatch')
 class Note_Detail(DetailView):
 	model = Note
 	template_name = "note_detail.html"
 
+@method_decorator(login_required, name='dispatch')
 class Note_Update(UpdateView):
 	model = Note
 	fields = [
@@ -176,10 +189,53 @@ class Note_Update(UpdateView):
 	def get_success_url(self):
 		return reverse('note_detail', kwargs={'pk': self.object.pk})
 
+@method_decorator(login_required, name='dispatch')
 class Note_Delete(DeleteView):
     model = Note
     template_name = "note_delete.html"
-    success_url = "/notes/"
+    success_url = '/notes'
+
+# django auth
+def signup_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            print('Welcome', user.username)
+            return HttpResponseRedirect('/user/'+str(user))
+        else:
+            HttpResponse('<h1>Try Again</h1>')
+    else:
+        form = UserCreationForm()
+        return render(request, 'signup.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/plants')
+
+def login_view(request):
+     # if post, then authenticate (user submitted username and password)
+    if request.method == 'POST':
+        form = AuthenticationForm(request, request.POST)
+        # form = LoginForm(request.POST)
+        if form.is_valid():
+            u = form.cleaned_data['username']
+            p = form.cleaned_data['password']
+            user = authenticate(username = u, password = p)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect('/user/'+u)
+                else:
+                    print('The account has been disabled.')
+            else:
+                print('The username and/or password is incorrect.')
+    else: # it was a get request so send the emtpy login form
+        # form = LoginForm()
+        form = AuthenticationForm()
+        return render(request, 'login.html', {'form': form}) 
+
 
 # Pests
 # class Pest_List(TemplateView):

@@ -20,6 +20,9 @@ urlpatterns = [
 	path('notes/<int:pk>/update', views.Note_Update.as_view(), name='note_update'),
 	path('notes/<int:pk>/delete', views.Note_Delete.as_view(), name='note_delete'),
 	path('user/<username>/', views.profile, name='profile'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('signup/', views.signup_view, name='signup'),
 
 	# path('pests/', views.pests_index, name='pests_list'),
 ]
