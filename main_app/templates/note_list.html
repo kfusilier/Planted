@@ -12,7 +12,7 @@ Note List
         <!-- Search Form  -->
         <form> 
             <div>
-				<a href="{% url 'note_create' %}">Add Note
+				<a href="{% url 'note_create' %}">Add Note<br><br>
                 <input type="text" name="kind" placeholder="note title"/></a>
                 <input type="submit" value="Search"/>
                 <button><a href="{% url 'note_list' %}">Clear Search</a></button>
@@ -23,7 +23,7 @@ Note List
             <div class="plantList">
                 <div class="plantStyle">
                     <a href="{% url 'note_detail' note.pk %}">
-                    <h4>{{note.title}}:{{note.date}}</h4></a>
+                    <h4>{{note.plant}}:{{note.date}}</h4></a>
                 {% endfor %}
                 </div>
             </div>

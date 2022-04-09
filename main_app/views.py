@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.views import View # class to handle requests
 from django.http import HttpResponse # class to handle sending a type of response
+from django.http import HttpResponseRedirect
 from .models import Plant, Note
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
-
+from django.contrib.auth.models import User
 # Create your views here.
 
 # Here we will be creating a class called Home and extending it from the View class
@@ -16,9 +17,6 @@ class Home(TemplateView):
 class About(TemplateView):
 	template_name = "about.html"
 
-class Profile(TemplateView):
-	template_name = "profile.html"
-
 class Plant_Detail(TemplateView):
 	template_name = "plant_detail.html"
 
@@ -27,6 +25,14 @@ class Note_Detail(TemplateView):
 
 class Calendar(TemplateView): 
 	template_name = "calendar.html"
+
+class Profile(TemplateView):
+	template_name = "profile.html"
+
+def profile(request, username):
+    user = User.objects.get(username=username)
+    plants = Plant.objects.filter(user=user)
+    return render(request, 'profile.html', {'username': username, 'plants': plants})
 
 # PLANTS
 class Plant_List(TemplateView):
@@ -71,6 +77,12 @@ class Plant_Create(CreateView):
 	]
 	template_name = "plant_create.html"
 	success_url = "/plants/"
+
+	def form_valid(self, form):
+		self.object = form.save(commit=False)
+		self.object.user = self.request.user
+		self.object.save()
+		return HttpResponseRedirect('/plants')
 
 class Plant_Detail(DetailView):
 	model = Plant
