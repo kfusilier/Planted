@@ -24,10 +24,13 @@ Plant Detail
 			<p>Direct Seed Outdoors: {{plant.outdoor_start}} - {{plant.outdoor_stop}}</p>
 			<p>Succession Planting: {{plant.succession}}</p>
 		{% for note in notes %}
-			<p>Notes: {{note.title}}</p>
+			<p>Notes: <a href="{% url 'note_detail' note.pk %}">
+            {{note.title}}</p></a>
 		{% empty %}
-			<div>Plant has no Notes.</div>
+			<div>Plant has no notes!</div>
 		{% endfor %}
+			<div><a href="{% url 'note_create' %}">Add Note</a>
+			</div>
 			<p>Pests: {{plant.pest.name}}
 		{% for pest in plant.pests.all %}
 				<p> {{pest.name}}</p>
