@@ -4,8 +4,7 @@ from . import views
 # this like app.use() in express
 urlpatterns = [
 	path('', views.Home.as_view(), name="home"),
-	path('about/', views.About.as_view(), name='about'), 
-	path('profile/', views.Profile.as_view(), name='profile'),  
+	path('about/', views.About.as_view(), name='about'),  
 	path('calendar/', views.Calendar.as_view(), name='calendar'),
 
 	path('plants/', views.Plant_List.as_view(), name='plant_list'),
