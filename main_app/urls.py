@@ -25,7 +25,9 @@ urlpatterns = [
 
 	# path('pests/', views.pests_index, name='pests_list'),
 ]
+	# path('user/<username>/', views.profile, name='profile'),
 
+	
 	# path('signup/', views.About.as_view(), name='signup'), 
 	# path('login/', views.About.as_view(), name='login'), 
 	# path('', views.About.as_view(), name='logout'),

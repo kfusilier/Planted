@@ -34,8 +34,6 @@ class Note_Detail(TemplateView):
 # class Calendar(TemplateView): 
 # 	template_name = "calendar.html"
 
-
-
 @login_required
 def calendar(request, username, month):
 	user = User.objects.get(username=username)
@@ -54,7 +52,8 @@ def calendar(request, username, month):
 @login_required
 def profile(request, username):
 	user = User.objects.get(username=username)
-	plants = list(user.plant_set.all())	
+	# plants = list(user.plant_set.all())	
+	plants = list(Plant.objects.all())	
 	return render(request, 'profile.html', {'username': username, 'plants': plants})
 
 # PLANTS
@@ -116,10 +115,13 @@ class Plant_Detail(DetailView):
 		print(context)
 		plant = context["plant"]
 		print(plant.pk)
+		user = self.request.user
 			# = self.request.GET.get("pk")
-		context['notes'] = Note.objects.filter(plant=plant.pk)
+		context['notes'] = Note.objects.filter(user=user.pk, plant=plant.pk)
 		print(context)
 		return context
+
+	# kind = self.request.GET.get("kind")
 
 @method_decorator(login_required, name='dispatch')
 class Plant_Update(UpdateView):
@@ -253,21 +255,23 @@ def login_view(request):
         return render(request, 'login.html', {'form': form})
 
 
-# Pests
-# class Pest_List(TemplateView):
+# class Pest(TemplateView):
 # 	template_name = "pest_list.html"
 
-# 	def get_context_data(self, **kwargs):
-# 		context = super().get_context_data(**kwargs)
-# 		# to get the query parameter we have to acccess it in the request.GET dictionary object        
-# 		name = self.request.GET.get("name")
-# 		# If a query exists we will filter by kind
-# 		if name != None:
-# 			context["pests"] = Note.objects.filter(title__icontains=title)
-# 			# We add a header context that includes the search param
-# 			context["header"] = f"Searching for {title}"
-# 		else:
-# 			context["notes"] = Note.objects.all()
-# 			# default header for not searching 
-# 			context["header"] = "All Notes"
-# 		return context
+# 	    def __str__(self):
+#         return self.name
+
+	# def get_context_data(self, **kwargs):
+	# 	context = super().get_context_data(**kwargs)
+	# 	# to get the query parameter we have to acccess it in the request.GET dictionary object        
+	# 	name = self.request.GET.get("name")
+	# 	# If a query exists we will filter by kind
+	# 	if name != None:
+	# 		context["pests"] = Note.objects.filter(title__icontains=title)
+	# 		# We add a header context that includes the search param
+	# 		context["header"] = f"Searching for {title}"
+	# 	else:
+	# 		context["notes"] = Note.objects.all()
+	# 		# default header for not searching 
+	# 		context["header"] = "All Notes"
+	# 	return context

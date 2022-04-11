@@ -9,12 +9,14 @@
 	{% block content %}
 		<Header id="headerStyle"><p>Sign Up</p></Header>
 		
-		<div>
-			<form action="" method="post">
-					{% csrf_token %}
-					{{ form.as_p }}
-					<input type="submit" value="Sign up">
-			</form>
+		<div class="formContainer">
+			<div id="formStyle">		
+				<form action="" method="post">
+						{% csrf_token %}
+						{{ form.as_p }}
+						<div><input type="submit" value="Sign up"></div>
+				</form>
+			</div>	
 		</div>
 
 	{% endblock %}

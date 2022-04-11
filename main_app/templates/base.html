@@ -2,43 +2,35 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
-	<script src="{% static 'scripts/app.js' %}" defer></script>
-	<title>{% block title %}{% endblock %}</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
+            <script src="{% static 'scripts/app.js' %}" defer></script>
+        <title>{% block title %}{% endblock %}</title>
+    </head>
 
-<body>
-	<nav>
-        {% if user.is_authenticated %}
-        <span><a href="{% url 'profile' user.username %}">Hello, {{ user.username }}!</a></span>
-        <span> | </span>
-        <span><a href="{% url 'logout' %}">Logout</a></span>
-        <span> | </span>
-        {% else %}
-        <span><a href="{% url 'login' %}">Login</a></span>
-        <span> | </span>
-        <span><a href="{% url 'signup' %}">SignUp</a></span>
-        {% endif %}
-        <a href="/admin">Admin</a>
-        <span> | </span>
-        <a href="/">Home</a>
-        <span> | </span>
-        <a href="/about">About</a>
-        <span> | </span>
-        <a href="/plants">Plant List</a>
-        <span> | </span>
-        {% now 'n' as cur_month %}
-		<a href="{% url 'calendar' user.username cur_month %}">Calendar</a>
-        <span> | </span>
-        <a href="/notes">Note List</a>
-        <span> | </span>
-			</nav>
-    {% block content %}  
-
-    {% endblock %}
-</body>
+    <body>
+        <nav>
+            <ul class="navul">
+            {% if user.is_authenticated %}
+                <li id="auth"><a href="{% url 'profile' user.username %}">Hello, {{ user.username }}!</a></li>
+                <li id="auth"><a href="{% url 'logout' %}">Logout</a></li>
+            {% now 'n' as cur_month %}
+                <li class="navli"><a href="{% url 'calendar' user.username cur_month %}">Calendar</a></li>
+                <li class="navli"><a href="/notes">Note List</a></li>
+                <li class="navli"><a href="/admin">Admin</a></li>
+            {% else %}
+                <li id="auth"><a href="{% url 'login' %}">Login</a></li>
+                <li id="auth"><a href="{% url 'signup' %}">SignUp</a></li>
+            {% endif %}
+                <li class="navli"><a href="/">Home</a></li>
+                <li class="navli"><a href="/about">About</a></li>
+                <li class="navli"><a href="/plants">Plant List</a></li>
+            </ul>
+        </nav>
+            {% block content %}  
+            {% endblock %}
+    </body>
 </html>

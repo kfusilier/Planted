@@ -2,19 +2,21 @@
 {% load static %}
 
 {% block title %} 
-	Login 💻
+	Login
 {% endblock %} 
 
 <body>
 	{% block content %}
 		<Header id="headerStyle"><p>Login</p></Header>
 
-		<div class='bodyStyle'>
-			<form method="post">
-					{% csrf_token %}
-					{{ form.as_p }}
-					<input type="submit" value="Submit">
-			</form>
+		<div class="formContainer">
+			<div id="formStyle">
+				<form method="post">
+						{% csrf_token %}
+						{{ form.as_p }}
+						<input type="submit" value="Submit">
+				</form>
+			</div>
 		</div>
 
 	{% endblock %} 

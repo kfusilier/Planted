@@ -23,6 +23,7 @@ Plant Detail
 			<p>Transplant Seedlings: {{plant.transplant_start|date:'M j'}} - {{plant.transplant_stop|date:'M j'}}</p>
 			<p>Plant Seeds Outdoors: {{plant.outdoor_start|date:'M j'}} - {{plant.outdoor_stop|date:'M j'}}</p>
 			<p>Succession: {{plant.succession}}</p>
+			
 		{% for note in notes %}
 			<p>Notes: <a href="{% url 'note_detail' note.pk %}">
             {{note.title}}</p></a>
@@ -31,12 +32,14 @@ Plant Detail
 		{% endfor %}
 			<div><a href="{% url 'note_create' %}">Add Note</a>
 			</div>
+			
 			<p>Pests: {{plant.pest.name}}
 		{% for pest in plant.pests.all %}
 				<p> {{pest.name}}</p>
 		{% empty %}
             <div>Plant has no Pests!</div>
         {% endfor %}
+
 			<p>Created: {{plant.created_at|date:'F j, Y'}}</p>
 			<a href="{% url 'plant_update' plant.pk %}">Update</a>
 		    <a href="{% url 'plant_delete' plant.pk %}">Delete</a>	

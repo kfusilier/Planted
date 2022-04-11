@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+
+{% block title %} 
+Pest Detail
+{% endblock %}
+
+<body>
+    {% block content %}
+		<Header id="headerStyle"><p>Pest Detail</p></Header>
+    
+		<div class='bodyStyle'>
+            <img src="{{pest.img}}" alt="{{pest.name}}"width="150" height="220"/>
+			<h4>{{pest.name}}</h4></a>
+			<p>method: {{pest.method}}</p>
+			<p>{{pest.treatment}}</p>
+		</div>
+
+    {% endblock %}
+</body>
+˚˚˚

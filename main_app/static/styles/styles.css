@@ -13,10 +13,9 @@ nav {
 	margin: 0;
 	padding: 0;
 	width: 100%;
-
 } 
 
-ul {
+.navul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -29,7 +28,7 @@ ul {
 	width: 100%;
 } 
 
-li {
+.navli {
 	float: left;
 	font-size: 20px;
 	font-family: 'sans-serif';
@@ -78,6 +77,7 @@ body {
 	border: 3px solid #7fb7be;
 	border-radius: 20px;
 }  
+
 
 .blurbContainer {
 	position: absolute;

@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-			<title>About</title>
-    </head>
-    <body>
-	{% extends 'base.html' %}
+{% extends 'base.html' %}
+
+{% block title %} 
+	About
+{% endblock %} 
+
+<body>
 	{% block content %}
-		<h1>About</h1>
+		<Header id="headerStyle"><p>About</p></Header>
+
+		<div class='bodyStyle'>
+			<p>About Body</p>
+		</div>	
+
 	{% endblock %}
-    </body>
-</html>
+</body>
