@@ -13,16 +13,16 @@ Plant Detail
 			<h4>{{plant.kind}}</h4></a>
 			<p>Variety: {{plant.variety}}</p>
 			<p>Seed Depth: {{plant.seed_depth}}</p>
-			<p>Seed Spacing: {{plant.seed_spacing}}</p>
-			<p>Germination: {{plant.germination}}</p>
-			<p>Plant Spacing: {{plant.plant_spacing}}</p>
+			<p>Seed Spacing: {{plant.seed_spacing}} inch(es)</p>
+			<p>Germination: {{plant.germination}} days</p>
+			<p>Plant Spacing: {{plant.plant_spacing}} inch(es)</p>
 			<p>Row Spacing: {{plant.row_spacing}}</p>
 			<p>Days to Harvest: {{plant.days_to_harvest}}</p>
-			<p>Ideal Sunlight: {{plant.sunlight}}</p>
+			<p>{{plant.sunlight}}</p>
 			<p>Plant Seeds Indoors: {{plant.indoor_start|date:'M j'}} - {{plant.indoor_stop|date:'M j'}}</p>
 			<p>Transplant Seedlings: {{plant.transplant_start|date:'M j'}} - {{plant.transplant_stop|date:'M j'}}</p>
-			<p>Direct Seed Outdoors: {{plant.outdoor_start|date:'M j'}} - {{plant.outdoor_stop|date:'M j'}}</p>
-			<p>Succession Planting: {{plant.succession}}</p>
+			<p>Plant Seeds Outdoors: {{plant.outdoor_start|date:'M j'}} - {{plant.outdoor_stop|date:'M j'}}</p>
+			<p>Succession: {{plant.succession}}</p>
 		{% for note in notes %}
 			<p>Notes: <a href="{% url 'note_detail' note.pk %}">
             {{note.title}}</p></a>

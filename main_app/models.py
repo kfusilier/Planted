@@ -14,11 +14,11 @@ class Pest(models.Model):
 		return self.name
 
 SUCCESSION_CHOICES = (
-	('not applicable', 'N/A' ),
-	('re-seed every 7 days', 'ever 7 days'),
-	('re-seed every 14 days', 'ever 14 days'),
-	('re-seed every 21 days', 'ever 21 days'),
-	('re-seed every 30 days', 'every 30 days')
+	('Not Applicable', 'N/A' ),
+	('Re-seed every 7 days', 'every 7 days'),
+	('Re-seed every 14 days', 'every 14 days'),
+	('Re-seed every 21 days', 'every 21 days'),
+	('Re-seed every 30 days', 'every 30 days')
 )
 
 SUNLIGHT_CHOICES = (
@@ -28,12 +28,22 @@ SUNLIGHT_CHOICES = (
 	('Partial Shade: 3-6 hours of sunlight, protect from mid-day sunlight', 'Part-Shade')
 )
 
+SEED_DEPTH_CHOICES = (
+	('Surface, no cover', 'surface' ),
+	('less-than 1/4 inch deep', 'less than 1/4 inch'),
+	('1/4 inch deep', '1/4 inch'),
+	('1/2 inch deep', '1/2 inch'),
+	('2/3 inch deep', '2/3 inch'),
+	('1 inch deep', '1 inch'),
+	('more than 1 inch deep', 'more than 1 inch')
+)
+
 class Plant(models.Model):
 
 	kind = models.CharField(max_length=30)
 	variety = models.CharField(max_length=50)
 	img = models.CharField(max_length=500)
-	seed_depth = models.IntegerField()
+	seed_depth = models.CharField(max_length=80, choices = SEED_DEPTH_CHOICES)
 	seed_spacing = models.IntegerField()
 	germination = models.IntegerField()
 	plant_spacing = models.IntegerField()
