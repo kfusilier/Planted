@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.template.defaultfilters import date
 import calendar 
-
+from django.db.models import Q
 
 # Create your views here.
 
@@ -39,7 +39,13 @@ class Note_Detail(TemplateView):
 @login_required
 def calendar(request, username, month):
 	user = User.objects.get(username=username)
-	plants = Plant.objects.filter(indoor_start__month=month)	
+	plants = Plant.objects.filter(
+		Q(indoor_start__month=month) | 
+		Q(outdoor_start__month=month) | 
+		Q(transplant_start__month=month)|
+		Q(indoor_stop__month=month) |
+		Q(outdoor_stop__month=month) |
+		Q(transplant_stop__month=month))	
 	return render(request, 'calendar.html', 
 	{'username': username, 
 	'plants': plants, 

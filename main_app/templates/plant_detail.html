@@ -19,9 +19,9 @@ Plant Detail
 			<p>Row Spacing: {{plant.row_spacing}}</p>
 			<p>Days to Harvest: {{plant.days_to_harvest}}</p>
 			<p>Ideal Sunlight: {{plant.sunlight}}</p>
-			<p>Plant Seeds Indoors: {{plant.indoor_start}} - {{plant.indoor_stop}}</p>
-			<p>Transplant Seedlings: {{plant.transplant_start}} - {{plant.transplant_stop}}</p>
-			<p>Direct Seed Outdoors: {{plant.outdoor_start}} - {{plant.outdoor_stop}}</p>
+			<p>Plant Seeds Indoors: {{plant.indoor_start|date:'M j'}} - {{plant.indoor_stop|date:'M j'}}</p>
+			<p>Transplant Seedlings: {{plant.transplant_start|date:'M j'}} - {{plant.transplant_stop|date:'M j'}}</p>
+			<p>Direct Seed Outdoors: {{plant.outdoor_start|date:'M j'}} - {{plant.outdoor_stop|date:'M j'}}</p>
 			<p>Succession Planting: {{plant.succession}}</p>
 		{% for note in notes %}
 			<p>Notes: <a href="{% url 'note_detail' note.pk %}">
@@ -37,7 +37,7 @@ Plant Detail
 		{% empty %}
             <div>Plant has no Pests!</div>
         {% endfor %}
-			<p>Created: {{plant.created_at}}</p>
+			<p>Created: {{plant.created_at|date:'F j, Y'}}</p>
 			<a href="{% url 'plant_update' plant.pk %}">Update</a>
 		    <a href="{% url 'plant_delete' plant.pk %}">Delete</a>	
 		</div>

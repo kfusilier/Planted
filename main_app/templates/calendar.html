@@ -2,7 +2,8 @@
 {% block title %} 
 Calendar 
 {% endblock %}
-{% load kfextras %}
+{% load extra_filters %}
+
 <body>
 		{% block content %}
 		<Header id="headerStyle"><p>{{ username }}'s calendar:</p></Header>
@@ -14,17 +15,25 @@ Calendar
 		</div>
 
 		{% for plant in plants %}
-			<img src="{{plant.img}}" alt="{{plant.kind}}"width="150" height="220">
-			<a href="/plants/{{ plant.id }}">
-				<h3>{{ plant.kind }}</h3>
 
-			</a>
-			{% if plant.indoor_start.month == month %}
-				Plant seed indoors
+			<div>			
+				<img src="{{plant.img}}" alt="{{plant.kind}}"width="100" height="100">
+			<a href="/plants/{{ plant.id }}">
+				{{ plant.kind }}: {{ plant.variety }} 
+
+			{% if plant.indoor_start.month == month or plant.indoor_stop.month == month %}
+				<p>Plant Seeds Indoors: {{plant.indoor_start|date:'M j'}} - {{plant.indoor_stop|date:'M j'}}</p>
 			{% endif %}
-			{% if plant.outdoor_start.month == month %}
-				Plant seed outdoors
+
+			{% if plant.outdoor_start.month == month or plant.outdoor_stop.month == month %}
+				<p>Direct Seed Outdoors: {{plant.outdoor_start|date:'M j'}} - {{plant.outdoor_stop|date:'M j'}}</p>
 			{% endif %}
+
+			{% if plant.transplant_start.month == month or plant.transplant_stop.month == month %}
+				<p>Transplant Seedlings: {{plant.transplant_start|date:'M j'}} - {{plant.transplant_stop|date:'M j'}}</p>
+			{% endif %}	</a> 
+			</div>
+			
 		{% endfor %}
 
 		{% endblock %}
