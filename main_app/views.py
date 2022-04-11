@@ -166,16 +166,18 @@ class Note_List(TemplateView):
 		context = super().get_context_data(**kwargs)
 		# to get the query parameter we have to acccess it in the request.GET dictionary object        
 		kind = self.request.GET.get("kind")
+		user = self.request.user
 		# If a query exists we will filter by kind
 		if kind != None:
-			context["notes"] = Note.objects.filter(title__icontains=title)
+			context["notes"] = Note.objects.filter(title__icontains=title, user=user.pk)
 			# We add a header context that includes the search param
 			context["header"] = f"Searching for {title}"
 		else:
-			context["notes"] = Note.objects.all()
+			context["notes"] = Note.objects.filter(user=user.pk)
 			# default header for not searching 
 			context["header"] = "All Notes"
 		return context
+
 
 @method_decorator(login_required, name='dispatch')
 class Note_Create(CreateView):
@@ -188,6 +190,12 @@ class Note_Create(CreateView):
 	]
 	template_name = "note_create.html"
 	success_url = "/notes/"
+
+	def form_valid(self, form):	
+		self.object = form.save(commit=False)
+		self.object.user = self.request.user
+		self.object.save()
+		return HttpResponseRedirect('/notes')
 
 @method_decorator(login_required, name='dispatch')
 class Note_Detail(DetailView):
