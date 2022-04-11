@@ -19,15 +19,15 @@
                 <li id="auth"><a href="{% url 'logout' %}">Logout</a></li>
             {% now 'n' as cur_month %}
                 <li class="navli"><a href="{% url 'calendar' user.username cur_month %}">Calendar</a></li>
+                <li class="navli"><a href="/plants">Plant List</a></li>
                 <li class="navli"><a href="/notes">Note List</a></li>
-                <li class="navli"><a href="/admin">Admin</a></li>
+                <!-- <li class="navli"><a href="/admin">Admin</a></li> -->
             {% else %}
                 <li id="auth"><a href="{% url 'login' %}">Login</a></li>
                 <li id="auth"><a href="{% url 'signup' %}">SignUp</a></li>
             {% endif %}
                 <li class="navli"><a href="/">Home</a></li>
                 <li class="navli"><a href="/about">About</a></li>
-                <li class="navli"><a href="/plants">Plant List</a></li>
             </ul>
         </nav>
             {% block content %}  

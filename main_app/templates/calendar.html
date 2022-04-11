@@ -4,22 +4,22 @@ Calendar
 {% endblock %}
 {% load extra_filters %}
 
-<body>
+<body> 
 		{% block content %}
 		<Header id="headerStyle"><p>{{ username }}'s calendar:</p></Header>
-		<div>
-		<a href="{% url 'calendar' user.username month|add:'-1' %}"><<--</a>
-		<!-- {% now "F" %} -->
-		{{ month|month_name }}
-		<a href="{% url 'calendar' user.username month|add:'1' %}">-->></a>	
-		</div>
-
-		{% for plant in plants %}
-
+		
+		<div class="bodyStyle">
+			<div>
+				<a href="{% url 'calendar' user.username month|add:'-1' %}"><<--</a>
+				<!-- {% now "F" %} -->
+				{{ month|month_name }}
+				<a href="{% url 'calendar' user.username month|add:'1' %}">-->></a>	
+			</div>
+			{% for plant in plants %}
 			<div>			
 				<img src="{{plant.img}}" alt="{{plant.kind}}"width="100" height="100">
 			<a href="/plants/{{ plant.id }}">
-				{{ plant.kind }}: {{ plant.variety }} 
+				{{ plant.kind }}: {{ plant.variety }} </a>
 
 			{% if plant.indoor_start.month == month or plant.indoor_stop.month == month %}
 				<p>Plant Seeds Indoors: {{plant.indoor_start|date:'M j'}} - {{plant.indoor_stop|date:'M j'}}</p>
@@ -31,10 +31,10 @@ Calendar
 
 			{% if plant.transplant_start.month == month or plant.transplant_stop.month == month %}
 				<p>Transplant Seedlings: {{plant.transplant_start|date:'M j'}} - {{plant.transplant_stop|date:'M j'}}</p>
-			{% endif %}	</a> 
+			{% endif %} 
 			</div>
 			
-		{% endfor %}
-
+			{% endfor %}
+		</div>		
 		{% endblock %}
 </body>

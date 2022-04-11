@@ -2,20 +2,22 @@
 {% load static %}
 
 {% block title %} 
-Profile 👤
+	Profile
 {% endblock %} 
 
 <body>
 		{% block content %}
-		<Header id="headerStyle"><p>{{ username }}'s collection:</p></Header>
-
-		{% for plant in plants %}
-			<img src="{{plant.img}}" alt="{{plant.kind}}"width="150" height="220">
-			<a href="/plants/{{ plant.id }}">
-				<h3>{{ plant.kind }}</h3>
-			</a>
-			
-		{% endfor %}
-
-		{% endblock %}
+		<Header id="headerStyle"><p>{{ username }}'s Profile:</p></Header>
+		
+		<div class="bodyStyle">
+			{% for plant in plants %}
+				<img src="{{plant.img}}" alt="{{plant.kind}}"width="150" height="220">
+				<a href="/plants/{{ plant.id }}">
+					<h3>{{ plant.kind }}</h3>
+				</a>
+				
+			{% endfor %}
+		</div>
+		
+			{% endblock %}
 </body>
