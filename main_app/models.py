@@ -14,11 +14,18 @@ class Pest(models.Model):
 		return self.name
 
 SUCCESSION_CHOICES = (
-	('N/A', 'not applicable'),
-	('7', 're-seed every 7 days'),
-	('14', 're-seed every 14 days'),
-	('21', 're-seed every 21 days'),
-	('30', 're-seed every 30 days')
+	('not applicable', 'N/A' ),
+	('re-seed every 7 days', 'ever 7 days'),
+	('re-seed every 14 days', 'ever 14 days'),
+	('re-seed every 21 days', 'ever 21 days'),
+	('re-seed every 30 days', 'every 30 days')
+)
+
+SUNLIGHT_CHOICES = (
+	('Full Sun: minimum 6 hours direct sunlight', 'Full-Sun'),
+	('Partial Sun: 3-6 hours direct sunlight', 'Part-Sun'),
+	('Full Shade: less than 3 hours direct sunlight', 'Full-Shade'),
+	('Partial Shade: 3-6 hours of sunlight, protect from mid-day sunlight', 'Part-Shade')
 )
 
 class Plant(models.Model):
@@ -32,7 +39,7 @@ class Plant(models.Model):
 	plant_spacing = models.IntegerField()
 	row_spacing = models.IntegerField()
 	days_to_harvest = models.IntegerField()
-	sunlight = models.IntegerField()
+	sunlight = models.CharField(max_length=80, choices = SUNLIGHT_CHOICES)
 	indoor_start = models.DateField()
 	indoor_stop = models.DateField()
 	transplant_start = models.DateField()
