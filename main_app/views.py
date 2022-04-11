@@ -12,6 +12,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.template.defaultfilters import date
+import calendar 
+
 
 # Create your views here.
 
@@ -28,11 +31,19 @@ class Plant_Detail(TemplateView):
 class Note_Detail(TemplateView):
 	template_name = "note_detail.html"
 
-class Calendar(TemplateView): 
-	template_name = "calendar.html"
+# class Calendar(TemplateView): 
+# 	template_name = "calendar.html"
 
-# class Profile(TemplateView):
-# 	template_name = "profile.html"
+
+
+@login_required
+def calendar(request, username, month):
+	user = User.objects.get(username=username)
+	plants = Plant.objects.filter(indoor_start__month=month)	
+	return render(request, 'calendar.html', 
+	{'username': username, 
+	'plants': plants, 
+	'month': month})
 
 @login_required
 def profile(request, username):

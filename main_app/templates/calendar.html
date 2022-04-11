@@ -1,15 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-			<title>Calendar</title>
-    </head>
-    <body>
-	{% extends 'base.html' %}
-	{% block content %}
-		<h1>Calendar</h1>
-	{% endblock %}
-    </body>
-</html>
+{% extends 'base.html' %} 
+{% block title %} 
+Calendar 
+{% endblock %}
+{% load kfextras %}
+<body>
+		{% block content %}
+		<Header id="headerStyle"><p>{{ username }}'s calendar:</p></Header>
+		<div>
+		<a href="{% url 'calendar' user.username month|add:'-1' %}"><<--</a>
+		<!-- {% now "F" %} -->
+		{{ month|month_name }}
+		<a href="{% url 'calendar' user.username month|add:'1' %}">-->></a>	
+		</div>
+
+		{% for plant in plants %}
+			<img src="{{plant.img}}" alt="{{plant.kind}}"width="150" height="220">
+			<a href="/plants/{{ plant.id }}">
+				<h3>{{ plant.kind }}</h3>
+
+			</a>
+			{% if plant.indoor_start.month == month %}
+				Plant seed indoors
+			{% endif %}
+			{% if plant.outdoor_start.month == month %}
+				Plant seed outdoors
+			{% endif %}
+		{% endfor %}
+
+		{% endblock %}
+</body>

@@ -9,7 +9,7 @@ Profile 👤
 		{% block content %}
 		<Header id="headerStyle"><p>{{ username }}'s collection:</p></Header>
 
-		{% for book in books %}
+		{% for plant in plants %}
 			<img src="{{plant.img}}" alt="{{plant.kind}}"width="150" height="220">
 			<a href="/plants/{{ plant.id }}">
 				<h3>{{ plant.kind }}</h3>
